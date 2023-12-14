@@ -9,10 +9,10 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Start</a>
       </div>
-      <div class="btn">
+      <div *ngIf="canAccessUsers()" class="btn">
         <a href="/users">Users</a>
       </div>
-      <div class="btn">
+      <div *ngIf="canAccessItems()" class="btn">
         <a href="/items">Items</a>
       </div>
     </div>
@@ -21,6 +21,14 @@
     <router-outlet></router-outlet>
   </div>
 
-  <footer id="footer">Mikołaj Jóźwik</footer>
+  <footer id="footer">
+    <div *ngIf="getUsername()">
+      {{getUsername()}}
+      <a class="logout" href (click)="logout()">Logout</a>
+    </div>
+    <div *ngIf="!getUsername()">
+      Nameless
+    </div>
+  </footer>
 
 </div>
